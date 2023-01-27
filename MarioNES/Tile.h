@@ -139,8 +139,6 @@ public:
 	std::vector<Finish> Finish_v;
 	std::vector<sf::Sprite> Sprite_v;
 
-	sf::Texture* Tileset;
-
 	bool finish = false;
 	bool done = false;
 

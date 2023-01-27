@@ -6,11 +6,12 @@
 
 int main() {
     sf::Clock Clock;
-    sf::Time timer;
 
     int windowWidth = 1024;
 
     int windowHeight = 896;
+
+    bool restart = false;
 
     sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Super Mario World");
 
@@ -52,6 +53,9 @@ int main() {
         view.reset(sf::FloatRect(view_x, 0, windowWidth, windowHeight));
         mario.vision.setPosition(view_x, 0);
 
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+            restart = true;
+        }
 
         window.setView(view);
         mario.update(deltaTime, entity.Sprite_v);

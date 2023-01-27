@@ -475,10 +475,11 @@ void Enemy::Logic(Mario& mario) {
 	}
 
 	if (!mario.can_be_hit) {
-		if (frameCounter.getElapsedTime().asSeconds() > 0.25f) {
+		if (frameCounter.getElapsedTime().asSeconds() > 0.15f) {
+			frameCounter.restart();
 			counter++;
 		}
-		if (counter > 400) {
+		if (counter > 8) {
 			mario.can_be_hit = true;
 			counter = 0;
 		}

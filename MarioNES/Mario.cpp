@@ -119,6 +119,9 @@ void Mario::animate(std::string animation)
         if (mushroom_count > 5) {
             pause = false;
             mushroom_count = 0;
+            if (isJumping) {
+                animate("jumping");
+            }
         }
     }
     else if (animation == "hit") {
@@ -320,7 +323,6 @@ void Mario::update(float deltaTime, std::vector<sf::Sprite> tiles)
     {
         if (!pause)
         {
-
             if (velocity.x != 0 && !crouching) {
                 if (velocity.x > 0) {
                     velocity.x -= 2.0f;
@@ -360,7 +362,9 @@ void Mario::update(float deltaTime, std::vector<sf::Sprite> tiles)
                 if (key == "left") {
                     sprite.setScale(sf::Vector2f(-scale, scale));
                 }
+            }
 
+            if (crouching) {
                 if (velocity.x != 0) {
                     if (velocity.x > 0) {
                         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
@@ -384,6 +388,9 @@ void Mario::update(float deltaTime, std::vector<sf::Sprite> tiles)
             if (!sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
                 crouching = false;
                 crouch = 0;
+                if (isJumping) {
+                    animate("jumping");
+                }
             }
 
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && !crouching)
@@ -395,7 +402,7 @@ void Mario::update(float deltaTime, std::vector<sf::Sprite> tiles)
                 }
                 if (!right_collide) {
                     if (velocity.x < 500.0f) {
-                        velocity.x += 3.00f;
+                        velocity.x += 2.40f;
                     }
                     else {
                         velocity.x = 500.0f;
@@ -412,7 +419,7 @@ void Mario::update(float deltaTime, std::vector<sf::Sprite> tiles)
                 }
                 if (!left_collide) {
                     if (velocity.x > -500.0f) {
-                        velocity.x -= 3.00f;
+                        velocity.x -= 2.40f;
                     }
                     else {
                         velocity.x = -500.0f;
